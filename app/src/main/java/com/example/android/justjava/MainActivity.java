@@ -9,6 +9,9 @@ import java.text.NumberFormat;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static int price = 5;
+    public int quantity = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,22 +19,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void submitOrder(View view) {
-        increment();
-        displayPrice();
+        quantity = 0;
+        displayPrice(0);
+        displayQuantity(0);
     }
 
-    private void increment() {
-        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        int current_number = Integer.parseInt(quantityTextView.getText().toString());
-        int new_number = current_number+1;
-        quantityTextView.setText("" + new_number);
+    public void increment(View view) {
+        quantity = quantity + 1;
+        displayQuantity(quantity);
+        displayPrice(quantity);
     }
 
-    private void displayPrice(){
+    public void decrement(View view) {
+        if (quantity != 0)
+            quantity = quantity - 1;
+        displayQuantity(quantity);
+        displayPrice(quantity);
+    }
+
+    private void displayQuantity(int number){
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
+        quantityTextView.setText("" + number);
+    }
+
+    private void displayPrice(int number){
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        int qty = Integer.parseInt(quantityTextView.getText().toString());
-        int price = 5;
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(qty*price));
+        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number*price));
     }
 }
