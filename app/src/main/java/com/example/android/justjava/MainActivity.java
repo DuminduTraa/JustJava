@@ -18,23 +18,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void submitOrder(View view) {
-        quantity = 0;
-        displayPrice(0);
-        displayQuantity(0);
+    public void submitOrder(View view){
+        displayPrice(quantity);
     }
 
     public void increment(View view) {
         quantity = quantity + 1;
         displayQuantity(quantity);
-        displayPrice(quantity);
     }
 
     public void decrement(View view) {
         if (quantity != 0)
             quantity = quantity - 1;
         displayQuantity(quantity);
-        displayPrice(quantity);
     }
 
     private void displayQuantity(int number){
